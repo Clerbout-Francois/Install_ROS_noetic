@@ -15,7 +15,7 @@ You can choose the image you want.
 
 _Figure 1: Ubuntu website for the installation of the 20.04 version._
 
-You need a USB key in order to flash it when the download of the image is finished (/!\ be sure to have enough space on your USB key).
+You need a USB key in order to flash it when the download of the image is finished (/!\ be sure to have enough space on your USB key, 4GO is sufficient).
 
 ## Install ROS
 
@@ -30,39 +30,35 @@ If you want to use the Ubuntu Desktop, open “System Settings…” > “Softwa
 If you want to use the terminal, open a terminal and you can directly execute those commands in a terminal :
 
 ```
-$ sudo add-apt-repository universe
-$ sudo add-apt-repository restricted
-$ sudo add-apt-repository multiverse
+sudo add-apt-repository universe
+sudo add-apt-repository restricted
+sudo add-apt-repository multiverse
 ```
 
 ### Setup sources
 
-Execute those 2 commands in the terminal :
+Execute this command in the terminal :
 
 ```
-
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
 ```
 
-```
+### Setup the keys
 
 ```
-
-With this last command you should see this message in the terminal :
-
+sudo apt install curl
+curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 ```
-
-```
-
 
 Now, simply update the sources to find new packages with the following command in the terminal :
 
 ```
-$ sudo apt update
+sudo apt update
 ```
 
 ### Install ROS core packages
 
-On the [Wiki](http://wiki.ros.org/melodic/Installation/Ubuntu) installation guide you are now given a list of choices for which ROS packages to install first.
+On the [Wiki](http://wiki.ros.org/noetic/Installation/Ubuntu) installation guide you are now given a list of choices for which ROS packages to install first.
 
 You have three choices, it depends of your storage. I will detail them, give you the command and specify which choice is the most appropriate for a NUC or a Raspberry.
 
@@ -72,13 +68,13 @@ You have three choices, it depends of your storage. I will detail them, give you
 sudo apt install ros-noetic-desktop-full
 ```
 
-**Desktop Install (Recommended for Raspberry Pi):** ROS, rqt, rviz, and robot-generic libraries.
+**Desktop Install (Recommended for Raspberry Pi4) :** ROS, rqt, rviz, and robot-generic libraries.
 
 ```
 sudo apt install ros-noetic-desktop
 ```
 
-**ROS-Base : (Bare Bones)** ROS package, build, and communication libraries. No GUI tools. 
+**ROS-Base (Bare Bones) (Recommended for Raspberry Pi3) :** ROS package, build, and communication libraries. No GUI tools. 
 
 ```
 sudo apt install ros-noetic-ros-base
@@ -108,7 +104,7 @@ The installation will be quite long. Several hundreds packages will be installed
 
 ### Environment setup
 
-It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell (terminal) is launched instead of doing ``` $ source /opt/ros/noetic/setup.bash ``` every time you want to run ros. So use this command :
+It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell (terminal) is launched instead of doing ``` source /opt/ros/noetic/setup.bash ``` every time you want to run ros. So use this command :
 
 ```
 echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
@@ -145,12 +141,12 @@ sudo apt install python-roslaunch
 Before you can use many ROS tools, you will need to initialize rosdep. rosdep enables you to easily install system dependencies for source you want to compile and is required to run some core components in ROS. If you have not yet installed rosdep, do so as follows.
 
 ```
-sudo apt install python-rosdep
+sudo apt install python3-rosdep
 ```
 
 With the following, you can initialize rosdep.
 ```
-sudo rosdep init
+sudo rosdep init 
 rosdep update
 ```
 
@@ -159,15 +155,15 @@ rosdep update
 The last step is to create your working directory. This is mandatory as ROS will only work in your catkin_ws.
 
 ```
-$ mkdir -p ~/catkin_ws/src
-$ cd ~/catkin_ws
-$ catkin_make
+mkdir -p ~/catkin_ws/src
+cd ~/catkin_ws
+catkin_make
 ```
 
 ```catkin_make``` allows you to root of your workspace and build any package found in ```~/catkin_ws/src```, just finish by sourcing devel directory :
 
 ```
-$ echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
 ```
 
 
@@ -177,4 +173,4 @@ You can now launch the command ``` roscore ``` in a terminal. Good coding !!
 
 Now, to test your installation, please proceed to the [ROS Tutorials](http://wiki.ros.org/ROS/Tutorials).
 
-And you can find the original tutorial for ROS melodic [here](http://wiki.ros.org/melodic/Installation/Ubuntu).
+And you can find the original tutorial for ROS noetic [here](http://wiki.ros.org/noetic/Installation/Ubuntu).
