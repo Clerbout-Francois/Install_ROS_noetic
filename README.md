@@ -11,7 +11,7 @@ For running ROS noetic, you need to download Ubuntu 20.04 from the [official web
 
 You can choose the image you want.
 
-![alt text](https://github.com/Clerbout-Francois/Use_ESP32_on_ArduinoIDE/blob/main/images_ROS_noetic/Ubuntu_website.png?raw=true)
+![alt text](https://github.com/Clerbout-Francois/Use_ESP32_on_ArduinoIDE/blob/main/Ubuntu_website.png?raw=true)
 
 _Figure 1 : Ubuntu website for the installation of the 20.04 version._
 
